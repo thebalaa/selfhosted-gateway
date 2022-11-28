@@ -6,7 +6,7 @@ RUN apk add gettext wireguard-tools caddy
 
 COPY client-entrypoint.sh /usr/bin/client-entrypoint.sh
 
-COPY Caddyfile.template /etc/Caddyfile.template
+COPY ./minecraft-server/nginx/minecraft.conf /etc/nginx/stream.conf
 
 ENV NOTEWORTHY_ENV $RELEASE_TAG
 ENV LINK_MTU=1380
