@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - '**' # This will run the workflow on every push to any branch
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Build images
+      run: make docker
+
+    - name: Create gateway network
+      run: make setup
+
+    - name: Launch Gateway
+      run: make gateway
+
+    - name: Create link on gateway
+      run: make link GATEWAY=localhost FQDN=app.example.com EXPOSE=app:3000
+
+    - name: Ensure link works by making request to app.example.com
+      run: curl --resolve app.example.com:443:127.0.0.1 http://app.example.com:443
