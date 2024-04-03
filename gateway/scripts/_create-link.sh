@@ -6,7 +6,7 @@ CONTAINER_NAME=$1
 LINK_CLIENT_WG_PUBKEY=$2
 
 # create gateway-link container
-CONTAINER_ID=$(docker run --name $CONTAINER_NAME --network gateway -p 18521/udp --cap-add NET_ADMIN --restart unless-stopped -it -e LINK_CLIENT_WG_PUBKEY=$LINK_CLIENT_WG_PUBKEY -d fractalnetworks/gateway-link:latest)
+CONTAINER_ID=$(docker run --name $CONTAINER_NAME --network gateway -p 25565 -p 18521/udp --cap-add NET_ADMIN --restart unless-stopped -it -e LINK_CLIENT_WG_PUBKEY=$LINK_CLIENT_WG_PUBKEY -d fractalnetworks/gateway-link:latest)
 # get gateway-link WireGuard pubkey 
 GATEWAY_LINK_WG_PUBKEY=$(docker exec $CONTAINER_NAME bash -c 'cat /etc/wireguard/link0.key |wg pubkey')
 # get randomly assigned WireGuard port

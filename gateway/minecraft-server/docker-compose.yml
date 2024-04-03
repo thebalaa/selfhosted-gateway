@@ -1,0 +1,15 @@
+services:
+  minecraft:
+    image: itzg/minecraft-server
+    environment:
+      EULA: true
+  link:
+    image: fractalnetworks/gateway-client:latest
+    environment:
+      LINK_DOMAIN: minecraft.fractalnetworks.co
+      EXPOSE: nginx:80 # not used
+      GATEWAY_CLIENT_WG_PRIVKEY: OJxUG2BjTmsq6BpYt6qWERP79PvpiDSm/onqgukRJXQ=
+      GATEWAY_LINK_WG_PUBKEY: N4QHAGMTuKjfxWGYUvOl/V4MuzSmVO1TDQQb+UMX42I=
+      GATEWAY_ENDPOINT: 5.161.51.115:49153
+    cap_add:
+      - NET_ADMIN
